@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Produk — KlikinAja</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand"><a href="index.html">KlikinAja</a></h1>
+      <nav>
+        <a href="index.html">Beranda</a>
+        <a href="products.html">Produk</a>
+        <a href="register.html">Daftar</a>
+        <a href="contact.html">Buku Tamu</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2>Produk Kami</h2>
+    <div id="product-list" class="product-grid"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year2"></span> KlikinAja.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Data produk sederhana 
+    const products = [
+      {
+        id: 1,
+        name: "Kacamata Dheatles Empire",
+        price: 22000,
+        img: "img/kacamata.jpg",
+        short: "Bahan Bagus Kece."
+      },
+      {
+        id: 2,
+        name: "Kaos Polos Hitam",
+        price: 28000,
+        img: "img/Kaos Polos.jpg",
+        short: "Bahan tebal bagus."
+      },
+      {
+        id: 3,
+        name: "Sepatu Hitam Docmart",
+        price: 35000,
+        img: "img/Sepatu hitam.jpg",
+        short: "Cocok untuk Nongkrong."
+      }
+    ];
+
+    function currency(id) {
+      return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(id);
+    }
+
+    const list = document.getElementById('product-list');
+    products.forEach(p => {
+      const card = document.createElement('article');
+      card.className = 'product-card';
+      card.innerHTML = `
+        <img alt="${p.name}" src="${p.img}">
+        <h4>${p.name}</h4>
+        <p class="price">${currency(p.price)}</p>
+        <p>${p.short}</p>
+        <p><a class="btn" href="product-detail.html?id=${p.id}">Detail</a></p>
+      `;
+      list.appendChild(card);
+    });
+
+    document.getElementById('year2').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
